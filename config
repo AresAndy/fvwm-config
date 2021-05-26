@@ -33,12 +33,22 @@ ClickTime 350
 MoveThreshold 3
 Style * SloppyFocus, MouseFocusClickRaises
 
-EwmhBaseStruts 62 162 0 48
+EwmhBaseStruts 62 80 0 0
 IgnoreModifiers L25
 # IgnoreModifiers L2
 SnapGrid 10 10 
 
-# Function template (emacs yasnippet: fvwmapp)
+# For windows who steal focus, ehmehmskypeehmehm
+DestroyFunc EWMHActivateWindowFunc
+DestroyFunc UrgencyFunc
+# AddToFunc UrgencyFunc
+# + I ThisWindow (!"Skype") Break
+# + I Iconify off
+# + I FlipFocus
+# + I Raise
+# + I WarpToWindow 5p 5p
+
+Style "Skype" !FPFocusByProgram
 
 # DestroyFunc Fvwm-hello
 # AddToFunc Fvwm-hello
@@ -79,6 +89,10 @@ AddToFunc FvwmFileManager
 DestroyFunc FvwmPHPStorm
 AddToFunc FvwmPHPStorm
 + I Exec /home/silvio/Scrivania/phpstorm.sh 
+
+DestroyFunc FvwmEmacs
+AddToFunc FvwmEmacs
++ I Exec emacs27 
 
 DestroyFunc FvwmRestartFeh
 AddToFunc FvwmRestartFeh
@@ -159,6 +173,20 @@ Silent Key Super_R A A FvwmTerm
 
 Key F4 A M Close
 Key F11 A C FvwmMaximize 100 100
+
+Key F1 A CS MoveToDesk 0 0
+Key F2 A CS MoveToDesk 0 1
+Key F3 A CS MoveToDesk 0 2
+
+Key 1 A CS GotoPage 0 0
+Key 2 A CS GotoPage 1 0
+Key 3 A CS GotoPage 2 0
+Key 4 A CS GotoPage 0 1
+Key 5 A CS GotoPage 1 1
+Key 6 A CS GotoPage 2 1
+Key 7 A CS GotoPage 0 2
+Key 8 A CS GotoPage 1 2
+Key 9 A CS GotoPage 2 2
 
 # Mouse 3 R A Menu FvwmWindowOpsMenu
 Mouse 4 T A FvwmWindowShade True
@@ -301,6 +329,7 @@ AddToMenu   FvwmProgramsMenu "=w=" Title
 + "Terminal%menu/terminal.png%" FvwmTerm 
 + "File%menu/thunar.png%" FvwmFileManager
 + "Browser%menu/chrome.png%" FvwmBrowser
++ "IDE%menu/emacs.png%" FvwmEmacs
 + "IDE%menu/phpstorm.png%" FvwmPHPStorm
 + "Mail%menu/thunderbird.png%" FvwmThunderbird
 
@@ -346,7 +375,7 @@ Style "MyButtons" NoTitle, !Handles, !Borders, Sticky, WindowListSkip, \
   CirculateSkip, StaysOnTop, FixedPosition, FixedSize, !Iconifiable
 
 DestroyModuleConfig MyButtons: *
-*MyButtons: Geometry 80x500-0+280
+*MyButtons: Geometry 80x555-0+280
 *MyButtons: Colorset 9
 *MyButtons: Rows 20
 *MyButtons: Columns 1
@@ -356,7 +385,8 @@ DestroyModuleConfig MyButtons: *
 *MyButtons: (1x2, Frame 0, Icon 48x48/terminal.png, Action(Mouse 1) "FvwmTerm") 
 *MyButtons: (1x2, Frame 0, Icon 48x48/thunar.png, Action(Mouse 1) "FvwmFileManager")
 *MyButtons: (1x2, Frame 0, Icon 48x48/chrome.png, Action(Mosue 1) "FvwmBrowser")
-*MyButtons: (1x2, Frame 0, Icon 48x48/phpstorm.png, Action(Mosue 1) "FvwmPHPStorm")
+*mybuttons: (1x2, frame 0, icon 48x48/phpstorm.png, action(mosue 1) "fvwmphpstorm")
+*mybuttons: (1x2, frame 0, icon 48x48/emacs.png, action(mosue 1) "fvwmemacs")
 *MyButtons: (1x2, Frame 0, Icon 48x48/thunderbird.png, Action(Mosue 1) "FvwmThunderbird")
 *MyButtons: (1x2, Frame 0, Swallow (NoClose,UseOld) "stalonetray" "Exec stalonetray -v -t")
 *MyButtons: (1x2, Frame 0, Swallow Clock "Module FvwmScript FvwmScript-Clock")
